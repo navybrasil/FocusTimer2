@@ -17,6 +17,9 @@ export function registerControls() {
 }
 
 export function setMinutes() {
+  let minutes = Number(el.minutes.textContent);
+  let seconds = Number(el.seconds.textContent);
+
   el.minutes.addEventListener("focus", () => {
     el.minutes.textContent = "";
   });
@@ -26,6 +29,12 @@ export function setMinutes() {
   el.minutes.addEventListener("blur", (event) => {
     let time = event.currentTarget.textContent;
     time = time > 60 ? 60 : time;
+
+    if (time == "") {
+      time = state.minutes;
+      updateDisplay(minutes, seconds);
+      return;
+    }
 
     state.minutes = time;
     state.seconds = 0;

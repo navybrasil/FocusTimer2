@@ -32,6 +32,28 @@ export function countdown() {
   state.countdownId = setTimeout(() => countdown(), 1000); // função de recursão, quando ela se chama em algum momento
 }
 
+export function plus() {
+  let minutes = Number(el.minutes.textContent);
+  let seconds = Number(el.seconds.textContent);
+
+  minutes += 5;
+  state.minutes = minutes;
+  updateDisplay(minutes, seconds);
+}
+
+export function minus() {
+  let minutes = Number(el.minutes.textContent);
+  let seconds = Number(el.seconds.textContent);
+
+  minutes -= 5;
+  if (minutes < 0) {
+    minutes = 0;
+    return;
+  }
+  state.minutes = minutes;
+  updateDisplay(minutes, seconds);
+}
+
 export function updateDisplay(minutes, seconds) {
   /* pesquisar nullish coalesing operator */
   minutes = minutes ?? state.minutes; // se minutes for null (não receber valor) então pega a informação que está no state.minutes
