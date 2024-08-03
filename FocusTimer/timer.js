@@ -2,6 +2,7 @@ import state from "./state.js";
 import * as el from "./elements.js";
 import { reset } from "./actions.js";
 import { kitchenTimer } from "./sounds.js";
+import * as display from "./display.js";
 
 export function countdown() {
   clearTimeout(state.countdownId);
@@ -26,7 +27,7 @@ export function countdown() {
     return;
   }
 
-  updateDisplay(minutes, seconds);
+  display.update(minutes, seconds);
 
   /* callback */
   state.countdownId = setTimeout(() => countdown(), 1000); // função de recursão, quando ela se chama em algum momento
@@ -38,7 +39,7 @@ export function plus() {
 
   minutes += 5;
   state.minutes = minutes;
-  updateDisplay(minutes, seconds);
+  display.update(minutes, seconds);
 }
 
 export function minus() {
@@ -47,18 +48,10 @@ export function minus() {
 
   minutes -= 5;
   if (minutes < 0) {
-    minutes = 0;
+    reset();
+
     return;
   }
   state.minutes = minutes;
-  updateDisplay(minutes, seconds);
-}
-
-export function updateDisplay(minutes, seconds) {
-  /* pesquisar nullish coalesing operator */
-  minutes = minutes ?? state.minutes; // se minutes for null (não receber valor) então pega a informação que está no state.minutes
-  seconds = seconds ?? state.seconds;
-
-  el.minutes.textContent = String(minutes).padStart(2, "0");
-  el.seconds.textContent = String(seconds).padStart(2, "0");
+  display.update(minutes, seconds);
 }

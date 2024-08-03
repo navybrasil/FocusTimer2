@@ -2,7 +2,7 @@ import state from "./state.js";
 import * as timer from "./timer.js";
 import * as el from "./elements.js";
 import * as sounds from "./sounds.js";
-import { kitchenTimer } from "./sounds.js";
+import * as display from "./display.js";
 
 export function toggleRunning() {
   state.isRunning = document.documentElement.classList.toggle("running");
@@ -17,9 +17,9 @@ export function reset() {
   state.isRunning = false;
   document.documentElement.classList.remove("running");
 
-  timer.updateDisplay(minutes, seconds);
+  display.update(minutes, seconds);
   sounds.buttonPressAudio.play();
-  kitchenTimer.play();
+  sounds.kitchenTimer.play();
 }
 
 export function set() {
@@ -37,48 +37,4 @@ export function decrease5Minutes() {
   timer.minus();
 }
 
-export function toggleMusic() {
-  state.isMute = document.documentElement.classList.toggle("music-on");
-
-  if (state.isMute) {
-    sounds.bgAudio.play();
-    return;
-  }
-
-  sounds.bgAudio.pause();
-}
-
-export function musicForest(action) {
-  toggleCardsMusic(action);
-}
-
-export function musicRain(action) {
-  toggleCardsMusic(action);
-}
-
-export function musicCafe(action) {
-  toggleCardsMusic(action);
-}
-
-export function musicFirePlace(action) {
-  toggleCardsMusic(action);
-}
-
-export function toggleCardsMusic(action) {
-  const oldMusic = state.playMusic;
-
-  if (oldMusic) {
-    document.documentElement.classList.remove(oldMusic);
-    sounds[`${oldMusic}`].pause();
-    state.playMusic = null;
-
-    if (oldMusic == action) {
-      return;
-    }
-  }
-
-  document.documentElement.classList.toggle(action);
-  sounds[`${action}`].play();
-
-  state.playMusic = action;
-}
+export { musicForest, musicRain, musicCafe, musicFirePlace } from "./music.js";

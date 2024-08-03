@@ -1,19 +1,11 @@
 import state from "./state.js";
-import { controls } from "./elements.js";
-import * as actions from "./actions.js";
 import * as el from "./elements.js";
-import { updateDisplay } from "./timer.js";
+import * as display from "./display.js";
+import * as handle from "./handleClick.js";
 
 export function registerControls() {
-  controls.addEventListener("click", (event) => {
-    const action = event.target.dataset.action;
-
-    if (typeof actions[action] != "function") {
-      return;
-    }
-
-    actions[action]();
-  });
+  el.controls.addEventListener("click", handle.ControlClick);
+  el.controlsMusic.addEventListener("click", handle.ControlClick);
 }
 
 export function setMinutes() {
@@ -32,26 +24,14 @@ export function setMinutes() {
 
     if (time == "") {
       time = state.minutes;
-      updateDisplay(minutes, seconds);
+      display.update(minutes, seconds);
       return;
     }
 
     state.minutes = time;
     state.seconds = 0;
 
-    updateDisplay();
+    display.update();
     el.minutes.removeAttribute("contenteditable");
-  });
-}
-
-export function registerControlsMusic() {
-  el.controlsMusic.addEventListener("click", (event) => {
-    const action = event.target.dataset.action;
-
-    if (typeof actions[action] != "function") {
-      return;
-    }
-
-    actions[action](action);
   });
 }
