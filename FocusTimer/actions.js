@@ -13,8 +13,8 @@ export function toggleRunning() {
 }
 
 export function reset() {
-  let minutes = 0;
-  let seconds = 0;
+  const minutes = 0;
+  const seconds = 0;
   state.isRunning = false;
   document.documentElement.classList.remove("running");
 
@@ -24,7 +24,7 @@ export function reset() {
 }
 
 export function set() {
-  let { minutes, seconds } = getTime();
+  const { minutes, seconds } = getTime();
 
   console.log("set " + minutes, seconds);
   display.update(minutes, seconds);

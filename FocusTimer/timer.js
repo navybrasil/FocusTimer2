@@ -12,7 +12,7 @@ export function countdown() {
     return;
   }
 
-  let { minutes, seconds } = getTime();
+  const { minutes, seconds } = getTime();
 
   seconds--;
 
