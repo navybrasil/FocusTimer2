@@ -3,6 +3,7 @@ import * as el from "./elements.js";
 import { reset } from "./actions.js";
 import { kitchenTimer } from "./sounds.js";
 import * as display from "./display.js";
+import { getTime } from "./timeUtils.js";
 
 export function countdown() {
   clearTimeout(state.countdownId);
@@ -11,8 +12,7 @@ export function countdown() {
     return;
   }
 
-  let minutes = Number(el.minutes.textContent);
-  let seconds = Number(el.seconds.textContent);
+  let { minutes, seconds } = getTime();
 
   seconds--;
 
@@ -34,8 +34,7 @@ export function countdown() {
 }
 
 export function plus() {
-  let minutes = Number(el.minutes.textContent);
-  let seconds = Number(el.seconds.textContent);
+  let { minutes, seconds } = getTime();
 
   minutes += 5;
   state.minutes = minutes;
@@ -43,8 +42,7 @@ export function plus() {
 }
 
 export function minus() {
-  let minutes = Number(el.minutes.textContent);
-  let seconds = Number(el.seconds.textContent);
+  let { minutes, seconds } = getTime();
 
   minutes -= 5;
   if (minutes < 0) {
