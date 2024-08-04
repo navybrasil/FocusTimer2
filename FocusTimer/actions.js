@@ -4,6 +4,7 @@ import * as el from "./elements.js";
 import * as sounds from "./sounds.js";
 import * as display from "./display.js";
 import { getTime } from "./timeUtils.js";
+import { pauseMusic } from "./music.js";
 
 export function toggleRunning() {
   state.isRunning = document.documentElement.classList.toggle("running");
@@ -21,12 +22,12 @@ export function reset() {
   display.update(minutes, seconds);
   sounds.buttonPressAudio.play();
   sounds.kitchenTimer.play();
+  pauseMusic(state.playMusic);
 }
 
 export function set() {
   const { minutes, seconds } = getTime();
 
-  console.log("set " + minutes, seconds);
   display.update(minutes, seconds);
   el.minutes.setAttribute("contenteditable", true);
   el.minutes.focus();

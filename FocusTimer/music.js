@@ -22,7 +22,9 @@ export function toggleCardsMusic(action) {
 
   if (oldMusic) {
     document.documentElement.classList.remove(oldMusic);
-    sounds[`${oldMusic}`].pause();
+    pauseMusic(oldMusic);
+    // sounds[`${oldMusic}`].pause();
+
     state.playMusic = null;
 
     if (oldMusic == action) {
@@ -31,7 +33,19 @@ export function toggleCardsMusic(action) {
   }
 
   document.documentElement.classList.toggle(action);
-  sounds[`${action}`].play();
+  playMusic(action);
 
   state.playMusic = action;
+}
+
+export function playMusic(music) {
+  sounds[`${music}`].play();
+}
+
+export function pauseMusic(music) {
+  sounds[`${music}`].pause();
+  if (state.playMusic === music) {
+    state.playMusic = null;
+    document.documentElement.classList.remove(music);
+  }
 }

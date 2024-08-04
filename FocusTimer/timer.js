@@ -12,7 +12,7 @@ export function countdown() {
     return;
   }
 
-  const { minutes, seconds } = getTime();
+  let { minutes, seconds } = getTime();
 
   seconds--;
 
@@ -46,7 +46,7 @@ export function minus() {
 
   minutes -= 5;
   if (minutes < 0) {
-    reset();
+    reset(state.playMusic);
 
     return;
   }
