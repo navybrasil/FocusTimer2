@@ -1,4 +1,3 @@
-import state from "./state.js";
 import * as el from "./elements.js";
 import * as handle from "./handleClick.js";
 

@@ -1,4 +1,3 @@
-import state from "./state.js";
 import * as events from "./events.js";
 import * as display from "./display.js";
 import * as input from "./inputValue.js";
