@@ -5,7 +5,6 @@ export const musicRain = new Audio("/assets/Chuva.wav");
 export const musicCafe = new Audio("/assets/Cafeteria.wav");
 export const musicFirePlace = new Audio("/assets/Lareira.wav");
 
-// bgAudio.loop = true;
 musicForest.loop = true;
 musicRain.loop = true;
 musicCafe.loop = true;

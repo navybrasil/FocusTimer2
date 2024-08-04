@@ -4,6 +4,7 @@ import * as el from "./elements.js";
 export function update(minutes, seconds) {
   minutes = minutes ?? state.minutes;
   seconds = seconds ?? state.seconds;
+  minutes = minutes > 99 ? 99 : minutes;
 
   state.minutes = minutes;
   state.seconds = seconds;

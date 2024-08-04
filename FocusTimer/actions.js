@@ -3,7 +3,6 @@ import * as timer from "./timer.js";
 import * as el from "./elements.js";
 import * as sounds from "./sounds.js";
 import * as display from "./display.js";
-import { getTime } from "./timeUtils.js";
 import { pauseMusic } from "./music.js";
 
 export function toggleRunning() {
@@ -26,10 +25,16 @@ export function reset() {
 }
 
 export function set() {
-  const { minutes, seconds } = getTime();
+  const { minutes, seconds } = state;
 
-  display.update(minutes, seconds);
+  if (state.isRunning === true) {
+    toggleRunning();
+  }
+
   el.minutes.setAttribute("contenteditable", true);
+  display.update(minutes, seconds);
+
+  el.minutes.textContent = "";
   el.minutes.focus();
 }
 

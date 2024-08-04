@@ -23,7 +23,6 @@ export function toggleCardsMusic(action) {
   if (oldMusic) {
     document.documentElement.classList.remove(oldMusic);
     pauseMusic(oldMusic);
-    // sounds[`${oldMusic}`].pause();
 
     state.playMusic = null;
 
@@ -43,6 +42,9 @@ export function playMusic(music) {
 }
 
 export function pauseMusic(music) {
+  if (music === null) {
+    return;
+  }
   sounds[`${music}`].pause();
   if (state.playMusic === music) {
     state.playMusic = null;

@@ -1,9 +1,7 @@
 import state from "./state.js";
-import * as el from "./elements.js";
 import { reset } from "./actions.js";
 import { kitchenTimer } from "./sounds.js";
 import * as display from "./display.js";
-import { getTime } from "./timeUtils.js";
 
 export function countdown() {
   clearTimeout(state.countdownId);
@@ -12,7 +10,7 @@ export function countdown() {
     return;
   }
 
-  let { minutes, seconds } = getTime();
+  let { minutes, seconds } = state;
 
   seconds--;
 
@@ -29,20 +27,19 @@ export function countdown() {
 
   display.update(minutes, seconds);
 
-  /* callback */
-  state.countdownId = setTimeout(() => countdown(), 1000); // função de recursão, quando ela se chama em algum momento
+  state.countdownId = setTimeout(() => countdown(), 1000);
 }
 
 export function plus() {
-  let { minutes, seconds } = getTime();
+  let { minutes, seconds } = state;
 
   minutes += 5;
-  state.minutes = minutes;
+
   display.update(minutes, seconds);
 }
 
 export function minus() {
-  let { minutes, seconds } = getTime();
+  let { minutes, seconds } = state;
 
   minutes -= 5;
   if (minutes < 0) {
